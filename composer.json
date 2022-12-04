@@ -1,0 +1,36 @@
+{
+  "name": "toolbox/swagger-notes",
+  "license": "Apache-2.0",
+  "description": "PHP Laravel ToolBox工具箱之SwaggerPHP生成注释",
+  "homepage": "https://github.com/mikeah2011/swagger-notes",
+  "keywords": [
+    "notes",
+    "toolbox",
+    "swagger",
+    "swagger-php",
+    "swagger-php-notes"
+  ],
+  "require": {
+    "php": "^7.1 || ^8.0"
+  },
+  "require-dev": {
+    "zircote/swagger-php": "^3.3.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Toolbox\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "authors": [
+    {
+      "name": "Michael",
+      "email": "mikeah2011@gmail.com"
+    }
+  ]
+}
