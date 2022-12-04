@@ -1,5 +1,5 @@
 {
-  "name": "toolbox/swagger-notes",
+  "name": "php-toolbox/swagger-notes",
   "license": "Apache-2.0",
   "description": "PHP Laravel ToolBox工具箱之SwaggerPHP生成注释",
   "homepage": "https://github.com/mikeah2011/swagger-notes",
