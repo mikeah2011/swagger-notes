@@ -13,7 +13,6 @@
   ],
   "require": {
     "php": "^7.1||^8.0.2||^8.2",
-    "illuminate/http": "^8.83",
     "zircote/swagger-php": "^4.5"
   },
   "require-dev": {
