@@ -6,15 +6,20 @@
   "keywords": [
     "notes",
     "toolbox",
+    "laravel",
     "swagger",
     "swagger-php",
     "swagger-php-notes"
   ],
   "require": {
-    "php": "^7.1 || ^8.0"
+    "php": "^7.1||^8.0.2||^8.2",
+    "illuminate/http": "^8.83",
+    "zircote/swagger-php": "^4.5"
   },
   "require-dev": {
-    "zircote/swagger-php": "^3.3.6"
+    "barryvdh/laravel-ide-helper": "^2.12",
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "psr-4": {
@@ -25,8 +30,11 @@
     ]
   },
   "config": {
+    "optimize-autoloader": true,
     "sort-packages": true
   },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Michael",
