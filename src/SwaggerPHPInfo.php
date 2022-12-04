@@ -14,21 +14,25 @@ class SwaggerPHPInfo
      */
     protected $request;
     /**
+     * @var object 其他請求體，解析出 rules以及validate 等
+     */
+    protected $otherRequest = NULL;
+    /**
      * @var array  请求参数数据
      */
-    protected $validated;
+    protected $validated = [];
     /**
      * @var array   返回数据结构
      */
-    protected $response;
+    protected $response = [];
     /**
      * @var array   入參字段規則
      */
-    protected $columnsRules;
+    protected $columnsRules = [];
     /**
      * @var array   出入參備註信息
      */
-    protected $columnsComments;
+    protected $columnsComments = [];
     /**
      * @var string  SwaggerPHP注釋的接口概述
      */
@@ -52,22 +56,24 @@ class SwaggerPHPInfo
     /**
      * @var string  SwaggerPHP注釋的操作ID
      */
-    protected $operationId;
+    protected $operationId = '';
     /**
      * @var string  SwaggerPHP注釋的標籤
      */
-    protected $tags;
+    protected $tags = 'API';
 
     /**
      * @description 設置請求體結構
      *
-     * @param $request
+     * @param      $request
+     * @param null $otherRequest
      *
      * @return $this
      */
-    public function setRequest($request): SwaggerPHPInfo
+    public function setRequest($request, $otherRequest = NULL): SwaggerPHPInfo
     {
         $this->request = $request;
+        $this->otherRequest = $otherRequest;
 
         return $this;
     }
@@ -97,8 +103,14 @@ class SwaggerPHPInfo
      */
     public function setComments(array $tables = [], array $rules = []): SwaggerPHPInfo
     {
+        if ($this->otherRequest) {
+            method_exists($this->otherRequest, 'validated') && $this->validated += $this->otherRequest->validated();
+            method_exists($this->otherRequest, 'toArray') && $this->validated += $this->otherRequest->toArray();
+            !$rules && method_exists($this->otherRequest, 'rules') && $rules = $this->otherRequest->rules();
+        } else {
+            $this->validated = $this->request->validated();
+        }
         $this->columnsRules = $rules ?: $this->request->rules();
-        $this->validated = $this->request->validated();
         $params = camel_snake($this->validated + $this->response, 'snake');
         $columns = [];
         array_walk_recursive($params, static function ($value, $key) use (&$columns) {

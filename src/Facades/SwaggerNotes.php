@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static object setRequest($request)
  * @method static object setResponse($response)
  * 
- * @method object setComments(array $tables = [], array $rules = [])
+ * @method object setComments(array $tables = [], $otherRequest = null)
  * @method object setSummary(string $summary = '接口概述')
  * @method object setDescription(string $description = '接口描述')
  * @method object setOperationId(string $function = '接口標識')

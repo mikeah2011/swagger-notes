@@ -13,7 +13,7 @@
 2. 請在 `Controller` 類中對應的方法 `return` 前，加入如下代碼：
 
    ```php
-   \Toolbox\Facades\SwaggerNotes::setRequest($request)
+   \Toolbox\Facades\SwaggerNotes::setRequest($request, null)
        ->setResponse($this->jsonRender($result))
        ->setComments(['affilliate_web', 'affilliate', 'member'], $request->rules($this->affiliateService))
        ->setSummary('我是當前接口的概述')
@@ -46,18 +46,18 @@
 
 4. 附表
 
-   | 方法                 | 釋義                                                         | 備註                                                  |
-   | -------------------- | ------------------------------------------------------------ | ----------------------------------------------------- |
-   | `setRequest`         | 設置請求體，可解析出當前接口的`method`、`parameter`、`url`、`pathInfo`等 |                                                       |
-   | `setResponse`        | 設置返回體，可直接給返回的數組結構                           |                                                       |
-   | `setComments`        | 設置字段的備註、規則等                                       | 接口字段涉及的表集合、驗證規則，不設置則取`->rules()` |
-   | `setSummary`         | 設置當前接口文檔的`summary`概述信息                          | 需自定義，不設置則取`->name()`                        |
-   | `setDescription`     | 設置當前接口文檔的`description`描述信息                      | 需自定義                                              |
-   | `setOperationId`     | 設置當前接口文檔的操作`ID`標識                               | 建議`__FUNCTION__`                                    |
-   | `setTags`            | 設置當前接口文檔的標籤分類                                   | 建議`__CLASS__`                                       |
-   | `setTitle`           | 設置全局接口文檔的標題                                       | 一次自定義，後續無需修改                              |
-   | `setInfoDescription` | 設置全局接口文檔的描述信息                                   | 一次自定義，後續無需修改                              |
-   | `setVersion`         | 設置全局接口文檔的版本信息                                   | 一次自定義，後續無需修改                              |
+   | 方法                 | 釋義                                                         | 可选 | 備註                                                         |
+   | -------------------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
+   | `setRequest`         | 設置請求體，可解析出當前接口的`method`、`parameter`、`url`、`pathInfo`等 | ✔️    | 第二個形參可选，支持被改造的Request請求體，如：`new GetAffiliateParameter($request)` |
+   | `setResponse`        | 設置返回體，可直接給返回的數組結構                           |      |                                                              |
+   | `setComments`        | 設置字段的備註、規則等                                       | ✔️    | 接口字段涉及的表集合；驗證規則，不設置則取`->rules()`        |
+   | `setSummary`         | 設置當前接口文檔的`summary`概述信息                          | ✔️    | 不設置則取`->name()`                                         |
+   | `setDescription`     | 設置當前接口文檔的`description`描述信息                      | ✔️    |                                                              |
+   | `setOperationId`     | 設置當前接口文檔的操作`ID`標識                               |      | 建議`__FUNCTION__`                                           |
+   | `setTags`            | 設置當前接口文檔的標籤分類                                   |      | 建議`__CLASS__`                                              |
+   | `setTitle`           | 設置全局接口文檔的標題                                       | ✔️    |                                                              |
+   | `setInfoDescription` | 設置全局接口文檔的描述信息                                   | ✔️    |                                                              |
+   | `setVersion`         | 設置全局接口文檔的版本信息                                   | ✔️    |                                                              |
 
 5. swagger-Notes生成效果
 
