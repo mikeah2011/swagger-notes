@@ -12,12 +12,12 @@
     "swagger-php-notes"
   ],
   "require": {
-    "php": "^7.1||^8.0.2||^8.2",
-    "zircote/swagger-php": "^4.5"
+    "php": "^7.1||^8.0.2||^8.2"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.12",
     "roave/security-advisories": "dev-latest",
+    "zircote/swagger-php": "^4.5",
     "phpunit/phpunit": "^9.5"
   },
   "autoload": {
