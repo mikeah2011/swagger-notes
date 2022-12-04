@@ -5,7 +5,7 @@
 1. 本地開發環境安裝依賴包
 
      ```php
-     composer require --dev toolbox/swagger-notes
+     composer require --dev laravel-toolbox/swagger-notes
      ```
 
 2. 請在 `Controller` 類中對應的方法 `return` 前，加入如下代碼：
