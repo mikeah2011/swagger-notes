@@ -23,7 +23,7 @@ class SwaggerNotes extends SwaggerNotesFormat
         $baseDir = base_path('swagger');
         $swaggerNotesDir = $baseDir . '/' . get_class_name(__CLASS__);
         // 任意一個有值，就需要更新一下info文件
-        ($this->version || $this->infoDescription || $this->title) && generate_file($swaggerNotesDir, 'swagger.php', $this->formatInfo());
+        generate_file($swaggerNotesDir, 'swagger.php', $this->formatInfo());
         // 直接覆蓋更新
         generate_file($swaggerNotesDir . '/' . $this->tags, $this->operationId . '.php', $this->formatNotes());
         generate_file($baseDir, 'swagger_doc.yaml', Generator::scan([$swaggerNotesDir])->toYaml());
