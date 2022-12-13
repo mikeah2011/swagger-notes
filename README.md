@@ -1,6 +1,6 @@
-### Laravel開發工具箱之`SwaggerNotes`生成工具
+### Laravel 開發工具箱之 `SwaggerNotes` 生成工具
 
-> 註：該工具僅生成注釋內容，依賴`swagger-php`包才能生成`.yaml`接口文件
+> 註：該工具僅生成注釋內容，依賴 `swagger-php` 包才能生成 `.yaml` 接口文件
 
 1. 本地開發環境安裝依賴包
 
@@ -8,25 +8,20 @@
     composer require laravel-toolbox/swagger-notes --dev
      ```
 
-     
-
 2. 請在 `Controller` 類中對應的方法 `return` 前，加入如下代碼：
 
    ```php
-   \Toolbox\Facades\SwaggerNotes::setRequest($request, null)
-       ->setResponse($this->jsonRender($result))
-       ->setComments(['affilliate_web', 'affilliate', 'member'], $request->rules($this->affiliateService))
-       ->setSummary('我是當前接口的概述')
-       ->setDescription('請在這裡修改當前接口的描述信息')
-       ->setTitle('全局性接口文檔的標題，一次性設置後無需更改')
-       ->setInfoDescription('同上，全局性接口文檔的描述')
-       ->setVersion('同上，全局性接口文檔的版本')
-       ->setOperationId(__FUNCTION__)
-       ->setTags(__CLASS__)
-       ->generate();
+   \Toolbox\Facades\SwaggerNotes::setRequest($request)
+      ->setResponse($this->jsonRender(TransformHelper::camelSnakeCase($result, 'camel_case')))
+      ->setComments(['affilliate_web', 'affilliate', 'member'], $request->rules($this->affiliateService))
+      ->setApiInfo([
+          'summary' => '查詢大聯盟會員資料',
+          'description' => '含是否填寫個人資料、賬戶資料',
+          'operation_id' => __FUNCTION__,
+          'tags' => __CLASS__,
+      ])
+      ->generate();
    ```
-
-   
 
 3. 默認生成路徑在`swagger/SwaggerNotes`目錄下，層級結構如下：
 
@@ -41,8 +36,6 @@
    ├── swagger.yaml				 
    └── swagger_doc.yaml          # 生成的接口文件
    ```
-
-   
 
 4. 附表
 
@@ -172,8 +165,6 @@
     * )
     */
    ```
-
-   
 
 6. swagger-yaml生成效果
 
