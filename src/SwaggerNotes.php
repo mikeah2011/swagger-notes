@@ -14,6 +14,12 @@ class SwaggerNotes extends SwaggerNotesFormat
      */
     public function generate(): void
     {
+        if (
+            !env('APP_DEBUG', false)
+            || !in_array(env('APP_ENV', ''), ['testing', 'test', 'develop', 'dev', 'site', 'sit'])
+        ) {
+            return;
+        }
         $baseDir = base_path('swagger');
         $swaggerNotesDir = $baseDir . '/' . get_class_name(__CLASS__);
         // 任意一個有值，就需要更新一下info文件

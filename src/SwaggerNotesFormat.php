@@ -107,7 +107,7 @@ EOF;
         foreach ($this->validated as $field => $value) {
             $rules = $this->columnsRules[$field] ?? [''];
             is_string($rules) && $rules = explode('|', $rules);
-            $string = explode(',', array_last(explode(':', array_last($rules))));
+            $string = explode(',', array_last(explode(':', (string)array_last($rules))));
             $enums = '';
             if (count($string) > 1) {
                 $enums = implode(',', $string);
