@@ -27,14 +27,14 @@
 
    ```shell
    swagger
-   ├── Swagger                            # 生成的注釋目錄
-   │         ├── Affiliate                # 生成的接口目錄
-   │         │      └── affiliateView.php # 生成的接口注釋文件
-   │         └── swagger.php              # 生成的注釋頭部信息文件
+   ├── Swagger                        # 生成的注釋目錄
+   │     ├── Affiliate                # 生成的接口目錄
+   │     │      └── affiliateView.php # 生成的接口注釋文件
+   │     └── swagger.php              # 生成的注釋頭部信息文件
    ├── swagger-constants.php
    ├── swagger-info.php
    ├── swagger.yaml
-   └── swagger_doc.yaml                   # 生成的接口文件
+   └── swagger_doc.yaml               # 生成的接口文件
    ```
 
 4. 附表
