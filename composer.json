@@ -17,8 +17,7 @@
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.12",
     "roave/security-advisories": "dev-latest",
-    "zircote/swagger-php": "^4.5",
-    "phpunit/phpunit": "^9.5"
+    "zircote/swagger-php": "^4.5"
   },
   "autoload": {
     "psr-4": {

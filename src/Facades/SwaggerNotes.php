@@ -1,14 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Toolbox\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static object setRequest($request)
+ * @method static object setRequest($request, $otherRequest = null)
  * @method static object setResponse($response)
- * 
- * @method object setComments(array $tables = [], $otherRequest = null)
+ *
+ * @method object setComments(array $tables = [], array $rules = [])
+ * @method object setApiInfo(array $apiInfo = [])
+ * @method object setInfo(array $info = [])
+ *
  * @method object setSummary(string $summary = '接口概述')
  * @method object setDescription(string $description = '接口描述')
  * @method object setOperationId(string $function = '接口標識')
@@ -16,6 +21,7 @@ use Illuminate\Support\Facades\Facade;
  * @method object setInfoDescription(string $infoDescription = '信息頭描述')
  * @method object setTitle(string $title = '接口服務')
  * @method object setVersion(string $version = '1.0.0')
+ * @method object setUrl(string $url = '')
  *
  * @method object generate()
  *

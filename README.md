@@ -5,7 +5,7 @@
 1. 本地開發環境安裝依賴包
 
      ```php
-     composer require laravel-toolbox/swagger-notes --dev
+    composer require laravel-toolbox/swagger-notes --dev
      ```
 
      
@@ -33,9 +33,9 @@
    ```shell
    swagger
    ├── SwaggerNotes              # 生成的注釋目錄
-   │   ├── AffiliateTransfer     # 生成的接口目錄
-   │   │   └── affiliateView.php # 生成的接口注釋文件
-   │   └── swagger.php           # 生成的注釋頭部信息文件
+   │         ├── AffiliateTransfer     # 生成的接口目錄
+   │         │         └── affiliateView.php # 生成的接口注釋文件
+   │         └── swagger.php           # 生成的注釋頭部信息文件
    ├── swagger-constants.php
    ├── swagger-info.php
    ├── swagger.yaml				 

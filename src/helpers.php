@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
@@ -96,6 +98,6 @@ if (!function_exists('get_class_name')) {
      */
     function get_class_name(string $class, array $search = ['Controller', 'Service', 'Repository']): string
     {
-        return str_replace($search, '', class_basename($class));
+        return Str::title(Str::before(Str::snake(str_replace($search, '', class_basename($class))), '_'));
     }
 }

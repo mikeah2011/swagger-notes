@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Toolbox;
 
 /**
@@ -15,6 +17,8 @@ class SwaggerNotesFormat extends SwaggerPHPInfo
      */
     protected function formatInfo(): string
     {
+        method_exists($this->request, 'getSchemeAndHttpHost') && $this->url = $this->request->getSchemeAndHttpHost();
+
         return <<<EOF
 <?php
 
@@ -22,11 +26,11 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(
- *     version="{$this->version}",
- *     title="{$this->title}",
- *     description="{$this->infoDescription}",
+ *     version="$this->version",
+ *     title="$this->title",
+ *     description="$this->infoDescription",
  * )
- * @OA\Server(url="{$this->request->getSchemeAndHttpHost()}")
+ * @OA\Server(url="$this->url")
  */
 EOF;
     }
@@ -36,8 +40,10 @@ EOF;
      */
     protected function formatNotes(): string
     {
-        $method = title_case($this->request->method());
-        $summary = $this->summary ?: $this->request->route()->getAction('as', '');
+        method_exists($this->request, 'method') && $this->method = $this->request->method();
+        $method = title_case($this->method);
+        method_exists($this->request, 'getPathInfo') && $this->pathInfo = $this->request->getPathInfo();
+        empty($this->summary) && method_exists($this->request, 'route') && $this->summary = $this->request->route()->getAction('as', '');
 
         return <<<EOF
 <?php
@@ -46,8 +52,8 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\\$method(
- *     path="{$this->request->getPathInfo()}",
- *     summary="$summary",
+ *     path="$this->pathInfo",
+ *     summary="$this->summary",
  *     description="$this->description",
  *     operationId="$this->operationId",
  *     tags={"$this->tags"},
@@ -67,7 +73,7 @@ EOF;
     {
         $requestBody = <<<EOF
 EOF;
-        if (in_array($this->request->method(), ['GET', 'HEAD'], true)) { // GET HEAD 只能用Parameter
+        if (in_array($this->method, ['GET', 'HEAD'], true)) { // GET HEAD 只能用Parameter
             $requestBody .= trim($this->formatParameter(), PHP_EOL);
         } else { // POST 、 PUT 接口 均使用 RequestBody
 
