@@ -16,7 +16,7 @@ class SwaggerNotes extends SwaggerNotesFormat
     {
         if (
             !env('APP_DEBUG', false)
-            || !in_array(env('APP_ENV', ''), ['testing', 'test', 'develop', 'dev', 'site', 'sit'])
+            || !in_array(env('APP_ENV', ''), ['local', 'testing', 'test', 'develop', 'dev', 'site', 'sit'])
         ) {
             return;
         }
