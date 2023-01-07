@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Toolbox;
 
 /**
@@ -53,6 +55,18 @@ class SwaggerPHPInfo
      * @var string  SwaggerPHP注釋的信息頭版本
      */
     protected $version = '1.0.0';
+    /**
+     * @var string API 请求地址
+     */
+    protected $url = '';
+    /**
+     * @var string API 請求方式
+     */
+    protected $method = 'GET';
+    /**
+     * @var string API 請求路徑
+     */
+    protected $pathInfo = '';
     /**
      * @var string  SwaggerPHP注釋的操作ID
      */
@@ -108,8 +122,10 @@ class SwaggerPHPInfo
             method_exists($this->otherRequest, 'toArray') && $this->validated += $this->otherRequest->toArray();
             !$rules && method_exists($this->otherRequest, 'rules') && $rules = $this->otherRequest->rules();
         } else {
-            $this->validated = $this->request->validated();
+            method_exists($this->request, 'validated') && $this->validated += $this->request->validated();
         }
+
+        empty($this->validated) && is_array($this->request) && $this->validated = $this->request;
         $this->columnsRules = $rules ?: $this->request->rules();
         $params = camel_snake($this->validated + $this->response, 'snake');
         $columns = [];
@@ -215,5 +231,96 @@ class SwaggerPHPInfo
         $this->tags = get_class_name($class);
 
         return $this;
+    }
+
+    /**
+     * @description 設置 API 的相關信息
+     *
+     * @param array $apiInfo
+     *
+     * @return $this
+     */
+    public function setApiInfo(array $apiInfo = []): SwaggerPHPInfo
+    {
+        if (!empty($apiInfo['url'])) {
+            $parseUrl = parse_url($apiInfo['url']);
+            $this->url = $parseUrl['scheme'] . '://' . $parseUrl['host'];
+            $this->pathInfo = $parseUrl['path'];
+        }
+
+        return $this->setSummary($apiInfo['summary'] ?? $this->summary)
+            ->setDescription($apiInfo['description'] ?? $this->description)
+            ->setOperationId($apiInfo['operation_id'] ?? $this->operationId)
+            ->setTags($apiInfo['tags'] ?? $this->tags)
+            ->setMethod($info['method'] ?? $this->method)
+            ->setPathInfo($info['path_info'] ?? $this->pathInfo);
+    }
+
+    /**
+     * @description 設置 INFO 的相關信息
+     *
+     * @param array $info
+     *
+     * @return $this
+     */
+    public function setInfo(array $info = []): SwaggerPHPInfo
+    {
+        return $this->setInfoDescription($info['info_description'] ?? $this->infoDescription)
+            ->setTitle($info['title'] ?? $this->title)
+            ->setVersion($info['version'] ?? $this->version)
+            ->setUrl($info['url'] ?? $this->url);
+    }
+
+    /**
+     * @description 设置 API 请求地址
+     *
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function setUrl(string $url = ''): SwaggerPHPInfo
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @description 设置 API 請求方式
+     *
+     * @param string $method
+     *
+     * @return $this
+     */
+    public function setMethod(string $method = 'GET'): SwaggerPHPInfo
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * @description 设置 API 請求路徑
+     *
+     * @param string $pathInfo
+     *
+     * @return $this
+     */
+    public function setPathInfo(string $pathInfo = ''): SwaggerPHPInfo
+    {
+        $this->pathInfo = $pathInfo;
+
+        return $this;
+    }
+
+    public function __construct()
+    {
+        // 如果沒有開啟 debug 模式或者不在本地和 site/sit/develop/dev 測試環境，就直接出去好了
+        if (
+            !env('APP_DEBUG', false)
+            || !in_array(env('APP_ENV', ''), ['testing', 'test', 'develop', 'dev', 'site', 'sit'])
+        ) {
+            return false;
+        }
     }
 }
