@@ -110,12 +110,13 @@ class SwaggerPHPInfo
     /**
      * @description 獲取出入參字段的備註信息「含是否必填」
      *
-     * @param array $tables 指定表
-     * @param array $rules  字段規則
+     * @param array $tables         指定表
+     * @param array $rules          字段規則
+     * @param array $optionComments 可選項的備註資料
      *
      * @return SwaggerPHPInfo
      */
-    public function setComments(array $tables = [], array $rules = []): SwaggerPHPInfo
+    public function setComments(array $tables = [], array $rules = [], array $optionComments = []): SwaggerPHPInfo
     {
         if ($this->otherRequest) {
             method_exists($this->otherRequest, 'validated') && $this->validated += $this->otherRequest->validated();
@@ -124,15 +125,14 @@ class SwaggerPHPInfo
         } else {
             method_exists($this->request, 'validated') && $this->validated += $this->request->validated();
         }
-
-        empty($this->validated) && is_array($this->request) && $this->validated = $this->request;
         $this->columnsRules = $rules ?: $this->request->rules();
-        $params = camel_snake($this->validated + $this->response, 'snake');
+        empty($this->validated) && is_array($this->request) && $this->validated = $this->request;
+        $params = $this->validated + $this->response;
         $columns = [];
         array_walk_recursive($params, static function ($value, $key) use (&$columns) {
-            in_array($key, $columns, true) && $columns[] = $key;
+            $columns[$key] = $value;
         });
-        $this->columnsComments = camel_snake(array_column($this->getColumnsInfo($tables, $columns), NULL, 'name'), 'camel');
+        $this->columnsComments = camel_snake(array_column($this->getColumnsInfo($tables, array_keys(camel_snake($columns))), 'comment', 'name')) + $optionComments;
 
         return $this;
     }
@@ -311,16 +311,5 @@ class SwaggerPHPInfo
         $this->pathInfo = $pathInfo;
 
         return $this;
-    }
-
-    public function __construct()
-    {
-        // 如果沒有開啟 debug 模式或者不在本地和 site/sit/develop/dev 測試環境，就直接出去好了
-        if (
-            !env('APP_DEBUG', false)
-            || !in_array(env('APP_ENV', ''), ['testing', 'test', 'develop', 'dev', 'site', 'sit'])
-        ) {
-            return false;
-        }
     }
 }
