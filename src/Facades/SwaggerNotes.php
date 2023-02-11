@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static object setRequest($request, $otherRequest = null)
  * @method static object setResponse($response)
  *
- * @method object setComments(array $tables = [], array $rules = [])
+ * @method object setComments(array $tables = [], array $rules = [], array $optionComments = [])
  * @method object setApiInfo(array $apiInfo = [])
  * @method object setInfo(array $info = [])
  *

@@ -14,15 +14,12 @@ class SwaggerNotes extends SwaggerNotesFormat
      */
     public function generate(): void
     {
-        if (
-            !env('APP_DEBUG', false)
-            || !in_array(env('APP_ENV', ''), ['local', 'testing', 'test', 'develop', 'dev', 'site', 'sit'])
-        ) {
+        // 當環境是 APP_ENV prod 或者 stage 時不生成文件
+        if (in_array(env('APP_ENV', ''), ['prod', 'stage'], true)) {
             return;
         }
         $baseDir = base_path('swagger');
         $swaggerNotesDir = $baseDir . '/' . get_class_name(__CLASS__);
-        // 任意一個有值，就需要更新一下info文件
         generate_file($swaggerNotesDir, 'swagger.php', $this->formatInfo());
         // 直接覆蓋更新
         generate_file($swaggerNotesDir . '/' . $this->tags, $this->operationId . '.php', $this->formatNotes());

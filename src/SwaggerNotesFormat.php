@@ -116,7 +116,7 @@ EOF;
 EOF;
             }
             $required = array_first($rules) === 'required' ? 'true' : 'false';
-            $description = $this->columnsComments[$field]->comment ?? '';
+            $description = $this->columnsComments[$field] ?? '';
             $type = get_type($value);
             $parameter .= <<<EOF
  *     @OA\Parameter(
@@ -166,7 +166,7 @@ EOF;
             $arr = [
                 'property' => $field,
                 'type' => $type,
-                'description' => $this->comments[$field]['comment'] ?? '',
+                'description' => $this->columnsComments[$field] ?? '',
                 'default' => $objectArr ? $objectValue : $value,
             ];
             foreach ($arr as $k => $v) {
