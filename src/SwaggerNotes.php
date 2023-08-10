@@ -6,6 +6,9 @@ namespace Toolbox;
 
 use OpenApi\Generator;
 
+/**
+ * @description SwaggerPHP注釋的基本信息配置「動態設置」
+ */
 class SwaggerNotes extends SwaggerNotesFormat
 {
     /**
@@ -23,6 +26,6 @@ class SwaggerNotes extends SwaggerNotesFormat
         generate_file($swaggerNotesDir, 'swagger.php', $this->formatInfo());
         // 直接覆蓋更新
         generate_file($swaggerNotesDir . '/' . $this->tags, $this->operationId . '.php', $this->formatNotes());
-        generate_file($baseDir, 'swagger_doc.yaml', Generator::scan([$swaggerNotesDir])->toYaml());
+        generate_file($baseDir, 'swagger_doc.json', Generator::scan([$swaggerNotesDir])->toJson());
     }
 }

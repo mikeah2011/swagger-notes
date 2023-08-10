@@ -46,7 +46,7 @@ class SwaggerPHPInfo
     /**
      * @var string  SwaggerPHP注釋的信息頭描述
      */
-    protected $infoDescription = '- kibana log_type:<br>- kkday-common-svc: request log<br> - kkday-common-svc_db: 查看 db 相關 log<br/>';
+    protected $infoDescription = '';
     /**
      * @var string  SwaggerPHP注釋的信息头标题
      */
