@@ -132,7 +132,10 @@ class SwaggerPHPInfo
         array_walk_recursive($params, static function ($value, $key) use (&$columns) {
             $columns[$key] = $value;
         });
-        $this->columnsComments = camel_snake(array_column($this->getColumnsInfo($tables, array_keys(camel_snake($columns))), 'comment', 'name')) + $optionComments;
+
+        $columnsInfo = $this->getColumnsInfo($tables, array_keys($columns));
+        $columnsInfo = array_column($columnsInfo, 'comment', 'name');
+        $this->columnsComments = $optionComments + $columnsInfo;
 
         return $this;
     }
