@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Toolbox;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Http\Request;
-
 /**
  * Trait SwaggerNotesTrait
  */
@@ -20,7 +17,7 @@ trait SwaggerNotesTrait
 
     protected $operation_id = 'TODO 我是一個接口 ID，請修改';
 
-    protected $tags = ['TODO 我是一個接口分類，請修改'];
+    protected $tags = 'TODO 我是一個接口分類，請修改';
 
     /**
      * @var array  出入參備註信息「不存在於 DB 欄位的字段」
@@ -53,15 +50,15 @@ trait SwaggerNotesTrait
     ];
 
     /**
-     * @param Request $request
-     * @param array $response
+     * @param $request
+     * @param $response
      *
-     * @throws BindingResolutionException
+     * @return void
      */
-    public function generateSwaggerDoc(Request $request, array $response = [])
+    public function generateSwaggerDoc($request, $response): void
     {
         Facades\SwaggerNotes::setRequest($request)
-                            ->setResponse($this->json($response))
+                            ->setResponse($response)
                             ->setComments($this->tables, $request->rules(), $this->optionComments)
                             ->setApiInfo([
                                 'summary' => $this->summary,

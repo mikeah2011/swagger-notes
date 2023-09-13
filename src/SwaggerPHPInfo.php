@@ -231,7 +231,7 @@ class SwaggerPHPInfo
      */
     public function setTags(string $class): SwaggerPHPInfo
     {
-        $this->tags = get_class_name($class);
+        $this->tags = $class;
 
         return $this;
     }
