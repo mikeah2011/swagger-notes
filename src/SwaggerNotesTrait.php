@@ -46,6 +46,12 @@ trait SwaggerNotesTrait
         'user_crt_dt' => '用戶當地下單時間',
         'country_name' => '產品所處國家',
         'contact_country_name' => '聯絡人所處國家',
+
+        'rows_affected' => '受影響行數',
+        'modify_user' => '異動人員 uuid',
+        'modify_date' => '異動時間',
+        'create_user' => '創建人員 uuid',
+        'create_date' => '創建時間',
         // 出參欄位 ENDED
     ];
 
