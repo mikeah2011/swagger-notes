@@ -55,6 +55,19 @@ trait SwaggerNotesTrait
         'filter' => '查詢/篩選/更新的條件',
         'start_date' => '開始時間',
         'ended_date' => '結束時間',
+
+        'meta' => '元數據',
+        'member' => '會員信息',
+        'antisocial' => '送審信息',
+        'affiliate_web' => '聯盟站點信息',
+        'register' => '送審註冊信息',
+        'request_id' => 'request 給的 id',
+        'report_summary_oid' => '流水號',
+        'profile_oid' => '由身家調查系統產生的審查對象流水號',
+        'check_year' => '該結果產生的年份',
+        'result' => 'False: 未通過 / True: 通過 / Null: 審核中',
+        'note' => '備註',
+        'cid' => '大聯盟網站ID(seq_affilliate_web)',
         // 出參欄位 ENDED
     ];
 
