@@ -52,6 +52,9 @@ trait SwaggerNotesTrait
         'modify_date' => '異動時間',
         'create_user' => '創建人員 uuid',
         'create_date' => '創建時間',
+        'filter' => '查詢/篩選/更新的條件',
+        'start_date' => '開始時間',
+        'ended_date' => '結束時間',
         // 出參欄位 ENDED
     ];
 
