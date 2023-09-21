@@ -59,6 +59,7 @@ trait SwaggerNotesTrait
         'meta' => '元數據',
         'member' => '會員信息',
         'antisocial' => '送審信息',
+        'affiliate' => '聯盟會員信息',
         'affiliate_web' => '聯盟站點信息',
         'register' => '送審註冊信息',
         'request_id' => 'request 給的 id',
