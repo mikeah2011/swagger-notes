@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Toolbox;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+
 /**
  * @description SwaggerPHP注釋的格式化處理類
  */
@@ -41,7 +44,7 @@ EOF;
     protected function formatNotes(): string
     {
         method_exists($this->request, 'method') && $this->method = $this->request->method();
-        $method = title_case($this->method);
+        $method = Str::title($this->method);
         method_exists($this->request, 'getPathInfo') && $this->pathInfo = $this->request->getPathInfo();
         empty($this->summary) && method_exists($this->request, 'route') && $this->summary = $this->request->route()->getAction('as', '');
 
@@ -79,7 +82,7 @@ EOF;
 
             $requiredStr = '"' . implode('","', array_keys(array_filter($this->columnsRules, static function ($rule) {
                     is_string($rule) && $rule = explode('|', $rule);
-                    return array_first($rule) === 'required';
+                    return Arr::first($rule) === 'required';
                 }))) . '"';
             $requestBodyProperty = trim($this->formatProperty($this->validated), PHP_EOL);
             $requestBody .= <<<EOF
@@ -107,7 +110,7 @@ EOF;
         foreach ($this->validated as $field => $value) {
             $rules = $this->columnsRules[$field] ?? [''];
             is_string($rules) && $rules = explode('|', $rules);
-            $string = explode(',', array_last(explode(':', (string)array_last($rules))));
+            $string = explode(',', Arr::last(explode(':', (string)Arr::last($rules))));
             $enums = '';
             if (count($string) > 1) {
                 $enums = implode(',', $string);
@@ -115,7 +118,7 @@ EOF;
  *             enum={{$enums}},
 EOF;
             }
-            $required = array_first($rules) === 'required' ? 'true' : 'false';
+            $required = Arr::first($rules) === 'required' ? 'true' : 'false';
             $description = $this->columnsComments[$field] ?? '';
             $type = get_type($value);
             $parameter .= <<<EOF
