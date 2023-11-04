@@ -121,6 +121,11 @@ EOF;
             $required = Arr::first($rules) === 'required' ? 'true' : 'false';
             $description = $this->columnsComments[$field] ?? '';
             $type = get_type($value);
+
+            if (str_contains($value, '*/')) {
+                $value = str_replace('*/', '*\/', $value);
+            }
+
             $parameter .= <<<EOF
  *     @OA\Parameter(
  *         name="$field",
