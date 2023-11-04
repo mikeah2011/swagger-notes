@@ -122,7 +122,7 @@ EOF;
             $description = $this->columnsComments[$field] ?? '';
             $type = get_type($value);
 
-            if (str_contains($value, '*/')) {
+            if (is_string($value) && str_contains( $value, '*/')) {
                 $value = str_replace('*/', '*\/', $value);
             }
 
@@ -169,6 +169,11 @@ EOF;
             $objectValue = !$value && $field ? 'null' : '';
             is_bool($value) && $value = $value ? 'true' : 'false'; // 如果value為佈爾型，賦值為字符串
             !$value && $value = 'null';                            // 如果value為假，賦值為null字符串
+
+            if (is_string($value) && str_contains( $value, '*/')) {
+                $value = str_replace('*/', '*\/', $value);
+            }
+
             // 遍歷組裝propertiesItems的元素，只有$v存在且為真時，需要組裝進來
             $propertiesItems = [];
             $arr = [
