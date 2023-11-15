@@ -126,13 +126,13 @@ EOF;
                 $value = str_replace('*/', '*\/', $value);
             }
 
-            $values = <<<EOF
-*             default="$value",$enums
-EOF;
-
             if (is_array($value)) {
                 $values = <<<EOF
  *             @OA\Items(type="string"),
+EOF;
+            } else {
+                $values = <<<EOF
+*             default="$value",$enums
 EOF;
             }
 
