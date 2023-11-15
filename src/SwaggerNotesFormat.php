@@ -122,8 +122,18 @@ EOF;
             $description = $this->columnsComments[$field] ?? '';
             $type = get_type($value);
 
-            if (is_string($value) && str_contains( $value, '*/')) {
+            if (is_string($value) && str_contains($value, '*/')) {
                 $value = str_replace('*/', '*\/', $value);
+            }
+
+            $values = <<<EOF
+*             default="$value",$enums
+EOF;
+
+            if (is_array($value)) {
+                $values = <<<EOF
+ *             @OA\Items(type="string"),
+EOF;
             }
 
             $parameter .= <<<EOF
@@ -134,9 +144,13 @@ EOF;
  *         required=$required,
  *         @OA\Schema(
  *             type="$type",
- *             default="$value",$enums
+ $values
  *         )
  *     ),
+ 
+ *         @OA\Schema(
+ *             type="array",
+
 
 EOF;
         }
@@ -147,7 +161,7 @@ EOF;
     /**
      * @description 格式化屬性內容
      *
-     * @param array  $data
+     * @param array $data
      * @param string $space
      *
      * @return string
@@ -170,7 +184,7 @@ EOF;
             is_bool($value) && $value = $value ? 'true' : 'false'; // 如果value為佈爾型，賦值為字符串
             !$value && $value = 'null';                            // 如果value為假，賦值為null字符串
 
-            if (is_string($value) && str_contains( $value, '*/')) {
+            if (is_string($value) && str_contains($value, '*/')) {
                 $value = str_replace('*/', '*\/', $value);
             }
 
