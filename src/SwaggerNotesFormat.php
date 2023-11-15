@@ -110,7 +110,9 @@ EOF;
         foreach ($this->validated as $field => $value) {
             $rules = $this->columnsRules[$field] ?? [''];
             is_string($rules) && $rules = explode('|', $rules);
-            $string = explode(',', Arr::last(explode(':', (string)Arr::last($rules))));
+            $last = Arr::last($rules);
+            is_array($last) && $last = Arr::first($last);
+            $string = explode(',', Arr::last(explode(':', (string)$last)));
             $enums = '';
             if (count($string) > 1) {
                 $enums = implode(',', $string);
@@ -128,7 +130,7 @@ EOF;
 
             if (is_array($value)) {
                 $values = <<<EOF
- *             @OA\Items(type="string"),
+*             @OA\Items(type="string"),
 EOF;
             } else {
                 $values = <<<EOF
@@ -147,10 +149,6 @@ EOF;
  $values
  *         )
  *     ),
- 
- *         @OA\Schema(
- *             type="array",
-
 
 EOF;
         }
