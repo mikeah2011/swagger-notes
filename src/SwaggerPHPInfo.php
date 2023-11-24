@@ -130,7 +130,7 @@ class SwaggerPHPInfo
         $params = $this->validated + $this->response;
         $columns = [];
         array_walk_recursive($params, static function ($value, $key) use (&$columns) {
-            if (method_exists($value, 'toArray')) {
+            if (is_callable([$value, 'toArray'])) {
                 $columns += $value->toArray();
             }
             $columns[$key] = $value;

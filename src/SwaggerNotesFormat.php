@@ -208,7 +208,7 @@ EOF;
                 $property = rtrim($property, '),' . PHP_EOL) . ',' . PHP_EOL;
                 $spaces = $space . '    ';
                 // 递归拼接子集
-                if (method_exists($value, 'toArray')) {
+                if (is_callable([$value, 'toArray'])) {
                     $value = $value->toArray();
                 }
                 $properties = trim($this->formatProperty($value, $spaces), PHP_EOL);
