@@ -11,7 +11,7 @@ final class GenerateTest extends TestCase
     public function testGenerate()
     {
         $request = [
-            'memberUuid' => '0a5a0390-7e74-40c5-a52d-e520e5bb92ab',
+            'memberUuid' => '11111111-1111-4111-8111-111111111111',
             'infoType' => 'ALL',
         ];
         $response = [
@@ -31,12 +31,12 @@ final class GenerateTest extends TestCase
                     "companyAddress" => "123",
                     "nationality" => "中國",
                     "identityType" => 1,
-                    "identityNumber" => "E73950085",
+                    "identityNumber" => "E00000000",
                     "identityName" => "Michael",
                     "identityNameEn" => "Michael",
-                    "residentialAddress" => "上海市普陀區梅林北路曹楊二村北梅園82號",
+                    "residentialAddress" => "上海市示例區示例路100號",
                     "telArea" => "+86",
-                    "tel" => "18801963698",
+                    "tel" => "13800000000",
                     "lastName" => "Michael",
                     "firstName" => "Ma",
                 ],
@@ -63,8 +63,8 @@ final class GenerateTest extends TestCase
                 ],
                 "webInfo" => [
                     [
-                        "memberUuid" => "0a5a0390-7e74-40c5-a52d-e520e5bb92ab",
-                        "cid" => 11011,
+                        "memberUuid" => "11111111-1111-4111-8111-111111111111",
+                        "cid" => 10001,
                         "siteName" => "haloooooo",
                         "webUrl" => "https://youtu-partners.sit.youtu-ota.test/",
                         "webCategory" => "0001",
@@ -75,7 +75,7 @@ final class GenerateTest extends TestCase
                         "isBrand" => "Y",
                         "brandName" => "youtu-partners_one",
                         "brandSetting" => [
-                            "imageUrl" => "https://img.sit.youtu-ota.test/image/get/s1.youtu-ota.test/youtu-partners_brand_11011/20210220020858_q1mBm/jpg",
+                            "imageUrl" => "https://img.sit.youtu-ota.test/image/get/s1.youtu-ota.test/youtu-partners_brand_10001/20210220020858_q1mBm/jpg",
                             "brandUrl" => "https://youtu-partners.youtu-ota.test",
                             "footerCopyright" => "",
                             "citys" => [],
@@ -83,8 +83,8 @@ final class GenerateTest extends TestCase
                         ],
                     ],
                     [
-                        "memberUuid" => "0a5a0390-7e74-40c5-a52d-e520e5bb92ab",
-                        "cid" => 11002,
+                        "memberUuid" => "11111111-1111-4111-8111-111111111111",
+                        "cid" => 10002,
                         "siteName" => "lanlanlanhi",
                         "webUrl" => "https://youtu-partners.sit.youtu-ota.test/",
                         "webCategory" => "0013",
@@ -103,8 +103,8 @@ final class GenerateTest extends TestCase
                         ],
                     ],
                     [
-                        "memberUuid" => "0a5a0390-7e74-40c5-a52d-e520e5bb92ab",
-                        "cid" => 11035,
+                        "memberUuid" => "11111111-1111-4111-8111-111111111111",
+                        "cid" => 10004,
                         "siteName" => "ryan",
                         "webUrl" => "https://youtu-partners.sit.youtu-ota.test/",
                         "webCategory" => "0001",
@@ -117,8 +117,8 @@ final class GenerateTest extends TestCase
                         "brandSetting" => null,
                     ],
                     [
-                        "memberUuid" => "0a5a0390-7e74-40c5-a52d-e520e5bb92ab",
-                        "cid" => 11013,
+                        "memberUuid" => "11111111-1111-4111-8111-111111111111",
+                        "cid" => 10003,
                         "siteName" => "haloooooo0220",
                         "webUrl" => "https://youtu-partners.sit.youtu-ota.test/",
                         "webCategory" => "0001",
@@ -129,7 +129,7 @@ final class GenerateTest extends TestCase
                         "isBrand" => "Y",
                         "brandName" => "youtu-partners_onee",
                         "brandSetting" => [
-                            "imageUrl" => "https://img.sit.youtu-ota.test/image/get/s1.youtu-ota.test/youtu-partners_brand_11013/20220217103431_ZY9RN/png",
+                            "imageUrl" => "https://img.sit.youtu-ota.test/image/get/s1.youtu-ota.test/youtu-partners_brand_10003/20220217103431_ZY9RN/png",
                             "brandUrl" => "https://youtu-partners1.youtu-ota.test",
                             "footerCopyright" => "",
                             "citys" => [],
